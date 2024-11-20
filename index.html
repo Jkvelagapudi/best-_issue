@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>BEST Issue Logger</title>
+    <style>
+        body {
+            background-color: #83CBA7;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .header {
+            font-size: 40px;
+            text-align: center;
+            margin-left: 1vw;
+            margin-right: 1vw;
+        }
+
+        .team-info {
+            display: flex;
+            width: 95vw;
+            flex-wrap: wrap;
+        }
+
+        .header-input {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 1vw 2vw;
+        }
+
+        .header-input p {
+            font-size: 16px;
+        }
+
+        .header-input input,
+        .header-input select {
+            border-radius: 10px;
+            height: 40px;
+            width: 15vw;
+            border: none;
+            padding-left: 1vw;
+            font-size: 18px;
+        }
+
+        .issue {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .issue p {
+            font-size: 24px;
+        }
+
+        .issue input {
+            border-radius: 10px;
+            height: 150px;
+            width: 75vw;
+            border: none;
+            font-size: 18px;
+            padding-left: 10px;
+        }
+
+        .issue-button {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        .issue-button input[type="submit"] {
+            padding: 6px 3vw;
+            background-color: #001e3e;
+            color: #ffffff;
+            font-size: 20px;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <p>State Championship Issue Form</p>
+    </div>
+
+    <form id="form">
+        <div class="team-info">
+            <div class="header-input">
+                <p>Team Number</p>
+                <input type="text" id="team-number" placeholder="Enter Team Number">
+            </div>
+
+            <div class="header-input">
+                <p>Round Number</p>
+                <input type="text" id="round-number" placeholder="Enter Round Number">
+            </div>
+
+            <div class="header-input">
+                <p>Field Number</p>
+                <select id="field-number">
+                    <option value="" disabled selected>Select Field</option>
+                    <option value="Field 1">Field 1</option>
+                    <option value="Field 2">Field 2</option>
+                    <option value="Field 3">Field 3</option>
+                </select>
+            </div>
+
+            <div class="header-input">
+                <p>Field Color</p>
+                <select id="color">
+                    <option value="" disabled selected>Select Color</option>
+                    <option value="Green">Green</option>
+                    <option value="Blue">Blue</option>
+                    <option value="Yellow">Yellow</option>
+                    <option value="Red">Red</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="issue">
+            <p>Issue</p>
+            <input type="text" id="issue-description" placeholder="Describe the issue">
+        </div>
+
+        <div class="issue-button">
+            <input type="submit" id="button" value="Submit Issue">
+        </div>
+    </form>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <script type="text/javascript">
+        // Initialize EmailJS
+        emailjs.init('vB2qOOz43YODePWAs'); 
+
+        // Attach an event listener to the form submission
+        document.getElementById('form').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the default form submission behavior
+
+            // Get form values
+            const teamNumber = document.getElementById('team-number').value;
+            const roundNumber = document.getElementById('round-number').value;
+            const issueDescription = document.getElementById('issue-description').value;
+            const field = document.getElementById('field-number').value;
+            const color = document.getElementById('color').value;
+
+            // Validate form inputs
+            if (!teamNumber || !roundNumber || !field || !color || !issueDescription) {
+                alert("Please fill out all fields before submitting.");
+                return;
+            }
+
+            // Create the email data
+            const emailData = {
+                team_number: teamNumber,
+                round_number: roundNumber,
+                issue_description: issueDescription,
+                field: field,
+                color: color
+            };
+
+            // Send the email via EmailJS
+            emailjs.send("service_i0e7zfh", "template_3fprwcf", emailData) 
+                .then(function (response) {
+                    console.log("Issue sent successfully:", response);
+                    alert("Issue submitted successfully!");
+                    // Redirect to another HTML page after email is sent
+                    window.location.href = "Button test.html";
+                })
+                .catch(function (error) {
+                    console.error("Error sending email:", error);
+                    alert("There was an issue sending the email. Please try again.");
+                });
+        });
+    </script>
+</body>
+</html>
