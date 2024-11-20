@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add and Remove Button</title>
+    <style>
+        body {
+            background-color: #83CBA7;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .header {
+            font-size: 30px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #buttonContainers {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center the containers horizontally */
+            gap: 30px;
+            width: 100%; /* Ensures proper alignment for centered content */
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 2px solid #333;
+            border-radius: 8px;
+            padding: 10px 20px;
+            width: 80%; /* Adjust container width */
+            max-width: 700px; /* Limit the maximum width */
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .left-text {
+            display: flex;
+            gap: 80px;
+        }
+
+        .left-text span {
+            font-size: 25px;
+            color: #333;
+            text-align: center;
+        }
+
+        .right-buttons {
+            display: flex;
+            gap: 60px;
+        }
+
+        .right-buttons button {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .resolved-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .resolved-btn:hover {
+            background-color: #45a049;
+        }
+
+        .alert-btn {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .alert-btn:hover {
+            background-color: #d32f2f;
+        }
+
+        .add-container {
+            margin-top: 20px;
+        }
+
+        .add-container button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #04284e;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .add-container button:hover {
+            background-color: #04284e;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Issue Logs</h1>
+    </div>
+
+    <div id="buttonContainers">
+        <!-- Initial Containers -->
+        <div class="button-container">
+            <div class="left-text">
+                <span>Team<br>[num]</span>
+                <span>Round<br>[num]</span>
+            </div>
+            <div class="right-buttons">
+                <a href="index (1).html">
+                    <button class="alert-btn">Alert</button>
+                </a>
+                <a href="Resolvement.html">
+                    <button class="resolved-btn">Resolved</button>
+                </a>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <div class="left-text">
+                <span>Team<br>[num]</span>
+                <span>Round<br>[num]</span>
+            </div>
+            <div class="right-buttons">
+                <a href="index (1).html">
+                    <button class="alert-btn">Alert</button>
+                </a>
+                <a href="Resolvement.html">
+                    <button class="resolved-btn">Resolved</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="add-container">
+        <button id="addButton">Add More</button>
+    </div>
+
+    <script>
+        // Get the container where the button containers are added
+        const buttonContainers = document.getElementById('buttonContainers');
+
+        // Add event listener to the "Add More" button
+        document.getElementById('addButton').addEventListener('click', () => {
+            // Create a new button container
+            const newContainer = document.createElement('div');
+            newContainer.className = 'button-container';
+
+            // Add left text
+            const leftText = document.createElement('div');
+            leftText.className = 'left-text';
+            leftText.innerHTML = `
+                <span>Team<br>[num]</span>
+                <span>Round<br>[num]</span>
+            `;
+            newContainer.appendChild(leftText);
+
+            // Add right buttons
+            const rightButtons = document.createElement('div');
+            rightButtons.className = 'right-buttons';
+            rightButtons.innerHTML = `
+                <a href="index (1).html">
+                    <button class="alert-btn">Alert</button>
+                </a>
+                <a href="Resolvement.html">
+                    <button class="resolved-btn">Resolved</button>
+                </a>
+            `;
+            newContainer.appendChild(rightButtons);
+
+            // Append the new container to the main container
+            buttonContainers.appendChild(newContainer);
+        });
+    </script>
+</body>
+
+</html>
